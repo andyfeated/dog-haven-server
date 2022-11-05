@@ -6,6 +6,7 @@ const { requestLogger, unknownEndpoint } = require('./src/utils/middleware/');
 const app = express();
 const cors = require('cors');
 const usersRouter = require('./src/controllers/users');
+const loginRouter = require('./src/controllers/login');
 
 mongoose.connect(config.MONGO_URI)
 	.then(() => logger.info('connected to MongoDB'))
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(requestLogger);
 
 app.use('/api/user', usersRouter);
+app.use('/api/login', loginRouter);
 
 app.use(unknownEndpoint);
 
